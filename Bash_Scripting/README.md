@@ -137,6 +137,8 @@ echo ${a[@]} -> retrun all array
 echo ${a[@]: 2} -> from third element
 
 ```
+by `declare -A dic` you can make key-val dic
+
 for **reading file**:
 ```
 i=1
@@ -147,3 +149,86 @@ done < file.txt
 ```
 ____________________________________________
 ## control structures
+you can figure it out from e.g:
+
+**if**
+```
+#!/bin/bash
+# control flow example
+a=-1
+if [ $a -gt 0 ];then # or write then in next line without ;
+        echo $a is positive
+else
+        echo $a is negative
+fi # for end of if
+
+```
+**while**
+```
+i=0
+while [$i -lt 10 ];do # or say until [ $i gt 10 ];do
+
+        echo i:$i
+        ((i+=1))
+done
+```
+**for**
+```
+for i in {1..10..2};do # or for (( i=1 ; i<10; i+=2 ))
+        echo $i
+done
+```
+**function**
+```
+function hi_name {
+        echo hi $1 # $i refered to i-th input and $@ refer to all inputs
+}
+hi_name Rasoul -> hi Rasoul
+```
+____________________________________________
+## interacting with USER
+you can get input when running bash.sh file, and access them in file by $i for ith input, $@ for all inputs and $# is number of inputs.
+
+getting usr and pass example:
+```
+while getopts :u:p:ab option; do
+        case $option in
+                u) user=$OPTARG;;
+                p) pass=$OPTARG;;
+                a) echo "Got the A flag";;
+                b) echo "Got the B Flag";;
+                ?) echo "unknown $OPTARG";;
+        esac
+done
+
+echo "user: $user"
+echo "pass: $pass"
+
+# for running type: file.sh -u username -p paswd -a -b
+```
+another example for read info from user:
+```
+echo what is your name?
+read name
+
+echo Enter your pass?
+read -s pass
+
+read -p" what is your favarit animal?" animal
+
+read -p "how old are you? [dd]" age
+while [[ ! $age =~ [0-9]{2} ]]; do
+        read -p "Age number like 26 pls!" age
+done
+
+select color in "white" "green" "red" "blue" "black"
+do
+        echo you selected $color
+        break
+done
+
+echo name: $name, pass:$pass, f_animal: $animal, age:$age, color:$color
+```
+____________________________________________
+So that's it! see, bash is a beautiful thing after introducing! 
+you can learn more by reading man bash or in net:) don't forget that practice make perfect.
