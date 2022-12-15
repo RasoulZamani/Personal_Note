@@ -21,7 +21,7 @@ Design patter is **common architectural approach**
 - structural
 - behavioral
 
-![design pattern category](pics/category.png)
+![design pattern category](./category.png)
 
 ********
 # SOLID design principle
